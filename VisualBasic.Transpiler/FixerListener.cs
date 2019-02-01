@@ -137,11 +137,6 @@ namespace VisualBasic.Transpiler
 
             if (context.subscripts() != null && !context.subscripts().IsEmpty)
             {
-                //string replacement = FixDimension(context.subscripts());
-
-                //if (!String.IsNullOrEmpty(replacement))
-                //    Rewriter.Replace(context.subscripts().valueStmt()[0].Start, replacement);
-
                 InitStructures[currentType].Add($"ReDim {context.ambiguousIdentifier().GetText()}({context.subscripts().GetText()})");
 
                 StringBuilder commas = new StringBuilder();
