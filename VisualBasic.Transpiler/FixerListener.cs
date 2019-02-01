@@ -137,6 +137,11 @@ namespace VisualBasic.Transpiler
 
             if (context.subscripts() != null && !context.subscripts().IsEmpty)
             {
+                //string replacement = FixDimension(context.subscripts());
+
+                //if (!String.IsNullOrEmpty(replacement))
+                //    Rewriter.Replace(context.subscripts().valueStmt()[0].Start, replacement);
+
                 InitStructures[currentType].Add($"ReDim {context.ambiguousIdentifier().GetText()}({context.subscripts().GetText()})");
 
                 StringBuilder commas = new StringBuilder();
@@ -152,17 +157,6 @@ namespace VisualBasic.Transpiler
             {
                 Rewriter.InsertBefore(context.argsCall().Start, "(");
                 Rewriter.InsertAfter(context.argsCall().Stop, ")");
-            }
-        }
-
-        // fix the dimension not starting at 0
-        public override void EnterSubscript([NotNull] VBAParser.SubscriptContext context)
-        {
-            if (context.TO() != null
-                && context.valueStmt()[0].children[0].GetType() == typeof(VBAParser.LiteralContext) 
-                && context.valueStmt()[0].GetText() != "1")
-            {
-                Rewriter.Replace(context.valueStmt()[0].Start, "0");
             }
         }
 

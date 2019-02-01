@@ -10,6 +10,8 @@ Attribute VB_Exposed = True
 
 Option Explicit
 
+Public Nope(1 To 20) As String
+
 Public Type Data
 	Num As Integer
 	Text(1 To 10) As String
